@@ -11,8 +11,8 @@ setup(
     description="A speech to text library that builds on top of gTTS and pyttsx3.",
     author="Philippe Mathew",
     author_email="philmattdev@gmail.com",
-    url="",
-    download_url="",
+    url="https://github.com/bossauh/mantra-voice",
+    download_url="https://github.com/bossauh/mantra-voice/archive/refs/tags/v_01.tar.gz",
     keywords=["speech", "synthesizer"],
     install_requires=install_requires,
     classifiers=[
