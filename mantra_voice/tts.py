@@ -73,6 +73,8 @@ class TextToSpeech:
 
     def update_config(self, config: dict) -> None:
         self.config = config
+        self.validate_config()
+        self.tfm.clear_effects()
         self._init_effects()
 
     async def _save_raw(self, text: str, engine: str) -> None:
