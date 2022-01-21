@@ -12,13 +12,13 @@ sounddevice==0.4.4
 setup(
     name="mantra-voice",
     packages=["mantra_voice"],
-    version="0.4",
+    version="0.5",
     license="MIT",
     description="A speech to text library that builds on top of gTTS and pyttsx3.",
     author="Philippe Mathew",
     author_email="philmattdev@gmail.com",
     url="https://github.com/bossauh/mantra-voice",
-    download_url="https://github.com/bossauh/mantra-voice/archive/refs/tags/v_04.tar.gz",
+    download_url="https://github.com/bossauh/mantra-voice/archive/refs/tags/v_05.tar.gz",
     keywords=["speech", "synthesizer"],
     install_requires=install_requires,
     classifiers=[
