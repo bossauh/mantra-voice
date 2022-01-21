@@ -101,7 +101,7 @@ class TextToSpeech:
         else:
             await self.mixer.play_file(self.processed_path, blocking=blocking)
 
-    async def say(self, text: str) -> None:
+    async def say(self, text: str, blocking: bool = False) -> None:
         await self._save_raw(text, self.config["engine"])
         await self._build_tfm()
-        await self._play()
+        await self._play(blocking)
