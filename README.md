@@ -66,9 +66,10 @@ TextToSpeech(
 - `raw_path: str` mp3 path that tells the engine where to save the unprocessed voice. i.e, no tfm effects.
 - `processed_path: str` wav path that tells the engine where to save the processed voice. i.e, with tfm effects.
 - `config: dict` Configuration, defaults to the constant `DEFAULT_CONFIG` variable inside `tts.py`
+- `mixer: Mixer` Mantra voice supports the Mixer class from [mantra-mixer](https://github.com/bossauh/mantra-mixer). When this class is provided, the play_file coroutine from `Mixer` will be used instead
 
 - ## Methods
-    - ### `async def say(text: str)`
+    - ### `async def say(text: str, blocking: bool = False)`
         - Make the engine say the provided `text`
     - ### `update_config(config: dict)`
         - Updates the current config with the provided config. (So you wouldn't have to reinitialize)
