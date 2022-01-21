@@ -25,13 +25,14 @@ DEFAULT_CONFIG = {
 
 
 class TextToSpeech:
-    def __init__(self, raw_path: str, processed_path: str, config: dict = None) -> None:
+    def __init__(self, raw_path: str, processed_path: str, config: dict = None, **kwargs) -> None:
         self.raw_path = raw_path
         self.processed_path = processed_path
         self.config = config
 
         self.pyttsx3_engine = pyttsx3.init()
         self.tfm = sox.Transformer()
+        self.mixer = kwargs.get("mixer")
 
         self.effect_mappings = {
             "tempo": self.tfm.tempo,
@@ -92,9 +93,13 @@ class TextToSpeech:
     async def _build_tfm(self) -> None:
         self.tfm.build_file(self.raw_path, self.processed_path)
 
-    async def _play(self) -> None:
-        data, rs = sf.read(self.processed_path, dtype="float32")
-        sd.play(data, rs, blocking=True)
+    async def _play(self, blocking: bool = False) -> None:
+
+        if not self.mixer:
+            data, rs = sf.read(self.processed_path, dtype="float32")
+            sd.play(data, rs, blocking=blocking)
+        else:
+            await self.mixer.play_file(self.processed_path, blocking=blocking)
 
     async def say(self, text: str) -> None:
         await self._save_raw(text, self.config["engine"])
