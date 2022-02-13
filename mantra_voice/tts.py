@@ -32,8 +32,7 @@ class TextToSpeech:
 
         self.pyttsx3_engine = pyttsx3.init()
         self.tfm = sox.Transformer()
-        self.mixer = kwargs.get("mixer")
-        self.track = kwargs.get("track")
+        self.output_track = kwargs.get("output_track")
 
         self.effect_mappings = {
             "tempo": self.tfm.tempo,
@@ -96,11 +95,11 @@ class TextToSpeech:
 
     async def _play(self, blocking: bool = False) -> None:
 
-        if not self.mixer:
+        if not self.output_track:
             data, rs = sf.read(self.processed_path, dtype="float32")
             sd.play(data, rs, blocking=blocking)
         else:
-            await self.mixer.play_file(self.processed_path, blocking=blocking, track=self.track)
+            await self.output_track.play_file(self.processed_path, blocking=blocking)
 
     async def say(self, text: str, blocking: bool = False) -> None:
         await self._save_raw(text, self.config["engine"])
